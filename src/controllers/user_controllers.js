@@ -18,7 +18,7 @@ Create = async (req, res) => {
     }
      catch (error) {
              console.log("something is wrong in control layer", error);
-             res.status(500).jsom({
+             res.status(500).json({
                  massage: "something went wrong",
                  success: false,
                  err: error

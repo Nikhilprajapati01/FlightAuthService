@@ -1,6 +1,7 @@
 const express = require("express");
 
 const {Port} = require("./config/Server_config.js")
+const Userrepository = require('./Repository/User_repository.js')
 
 
 const app = express();
@@ -15,9 +16,15 @@ const PrePareAndServer = ()=>{
     app.use('/api', v1routes);
 
 
+
+
     
-        app.listen(Port ,()=>{
+        app.listen(Port , async ()=>{
             console.log(`server start in ${Port}`);
+            const repo = new Userrepository();
+            const user = await repo.getbyid(1)
+            console.log(user);
+            
             
         })
    
