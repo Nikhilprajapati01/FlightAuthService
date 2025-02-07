@@ -21,9 +21,9 @@ const PrePareAndServer = ()=>{
     
         app.listen(Port , async ()=>{
             console.log(`server start in ${Port}`);
-            const repo = new Userrepository();
-            const user = await repo.getbyid(1)
-            console.log(user);
+            // const repo = new Userrepository();
+            // const user = await repo.getbyid(1)
+            // console.log(user);
             
             
         })
