@@ -42,6 +42,34 @@ class UserServices {
                 throw error
                 }
     }
+
+    async isAuthenticated(token) {
+        try {
+            const response = this.Verifytoken(token);
+            if(!response) {
+                throw {error: 'Invalid token'}
+            }
+            const user = await this.userrepository.getbyid(response.id);
+            if(!user) {
+                throw {error: 'No user with the corresponding token exists'};
+            }
+            return user.id;
+        } catch (error) {
+            console.log("Something went wrong in the auth process");
+            throw error;
+        }
+    }
+
+    async isAdmin(userid){
+        try {
+            const response = await this.userrepository.isAdmin(userid)
+            return response
+        } catch (error) {
+            console.log("Something went wrong in the find admin process");
+            throw error;
+        }
+
+    }
      
     createToken(user) {
         try {
@@ -57,8 +85,8 @@ class UserServices {
 
      Verifytoken(token){
         try {
-            const result = jwt.verify(token, JWT_KEY);
-            return result
+            const result = jwt.verify(token, jwt_key);
+            return result;
         } catch (error) {
             console.log("something is wrong in verify token", error);
             throw error

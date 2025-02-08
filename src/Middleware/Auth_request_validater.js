@@ -9,7 +9,19 @@ const validateauth = (req , res , next) => {
     }
     next();
     }
+const isAdminvadidation = (req , res , next) => {
+    if(!req.body.userid){
+        return res.status(404).json({
+            succes: "false",
+            massage: " something went wrong",
+            data: {},
+            err: "email and password is missing"
+        })
+    }
+    next();
+    }
     
     module.exports = {
-        validateauth
+        validateauth,
+        isAdminvadidation
     }
